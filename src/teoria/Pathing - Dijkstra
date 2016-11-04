@@ -1,0 +1,37 @@
+Algoritmo de Caminhos mais Curtos (Dijkstra)
+
+*SSSP (single-source-shortest path)
+	- Algoritmo guloso
+	- Grafo direcionado, com pesos não-negativos
+	
+Algoritmo Dijkstra
+	Entrada:
+		Grafo e vértice de origem
+	Estruturas de apoio:
+		Heap-minimo h
+		vetor de distância d
+		vetor de antecessores a
+
+Construa um heap-mínimo armazenando todos os vértices e suas distâncias diretas a partir da origem.
+Construa um vetor d inicializando com as distâncias diretas a partir da origem.
+Faça n vezes:
+	Vértice w = vértice com a menor distância calculada (primeiro elemento do heap-mínimo deve ser excluído)
+		para cada vértice v no heap-mínimo:
+			d[v] = menor valor entre d[v] e d[w] + peso entre w e v.
+	Se houve alteração de valor em d[v], ajustar a[v] = w.
+	
+		A	B	C	D	E					A	B	C	D	E
+	d = 0	10	50	30	60				a:	.	A	D	A	C			w: A, B, D, C, E
+	
+	w: E
+	
+	
+	HEAP:
+				A0
+		B10			E100
+	C.		D30
+	
+	
+		D30					B10				C.				D30				E100		C50				E60
+	B10		E100 ->		D30		E100  -> D30	E100 -> C60		E100 ->C60			->E90		->	
+C.					C.

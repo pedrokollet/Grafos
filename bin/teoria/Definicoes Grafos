@@ -1,0 +1,98 @@
+Algoritmos:
+	Busca em profundidade
+	Busca em largura
+	Caminhos + curtos
+	Árvore de custo mínimo
+	Ordenação topológica
+	
+Definição:
+	Um grafo é um par G = (V,E), em que V é um conjunto de vértices e E é um conjunto de arestas E : V x V. Cada aresta é um par (vértice origem, vértice destino).
+	
+		G = ({A, B, C, D, E}, {(A,B), (B,E), (A,C), (C,B), (D,E), (D,C)})
+
+		É possível adicionar pesos nas arestas informações associadas às arestas (distância, tempo, $), adicionando mais um elemento ({},{},{}).
+	
+	Grafos Direcionados				Grafos não direcionados
+Direção explícita(retas)	X	Cada aresta representa duas direções
+		A->B							(A->B) , (B->A)
+		
+		
+Dado o seguinte grafo não direcionado, construa sua definição G = (V,E)
+							
+		A-B
+		B-C B-F
+		F-E F-D
+		E-D
+		
+	Matriz de Adjacência:
+							
+	int matriz[][] = new int[6][6];
+	matriz[0][1] = 1;
+	matriz[1][0] = 1;
+	matriz[1][2] = 1;
+	matriz[2][1] = 1;
+	matriz[1][5] = 1;
+	matriz[5][1] = 1;
+	matriz[5][4] = 1;							
+	matriz[4][5] = 1;
+	matriz[5][3] = 1;
+	matriz[3][5] = 1;
+	matriz[4][3] = 1;
+	matriz[3][4] = 1;
+	
+	Vértices
+	
+	G = ({A,B,C,D,E,F}, {(A,B), (B,A), (B,C), (C,B), (B,F), (F, B), (F,E), (E,F), (F,D), (D,F), (E, D), (D, E)}
+
+	Lista de Adjacência:
+	
+	A[] -> {B -> null}
+	B[] -> {A -> C -> F -> null}
+	C[] -> {B -> null}
+	D[] -> {E -> F -> null}
+	E[] -> {D -> F -> null}
+	F[] -> {B -> D -> E -> null}
+	
+	
+	
+	int matriz[][] = new int[5][5];
+	matriz[0][2] = 9;
+	matriz[1][0] = 7;
+	matriz[1][2] = 11;							OU						G=({A, B, C, D, E}, {(A,C),(B,A),(B,C),(B,E),(C,D),(E,D)}, {9, 7, 11, 7, 10, 4})
+	matriz[1][4] = 7;
+	matriz[2][3] = 10;
+	matriz[4][3] = 4;
+		
+		
+Formas de Representação:
+	Matriz de Adjacências:
+		O grafo é representado por uma matriz quadrada V x V. As "linhas" representam vértices de origem e as "colunas" representam vértices de destino.
+		Se existe uma aresta entre os vértices I e J, então um sinal (ou o peso da aresta) é colocado em matriz[I][J].
+		
+		VANTAGENS:
+			Matriz é intuitiva, simples de entender.
+			A tarefa de se descobrir se existe uma aresta entre A e B é de complexidade constante (ou seja, é sempre a mesma complexidade, seja o vetor[5][5] ou [5000000][5000000]).
+		DESVANTAGENS:
+			Muito espaço alocado acaba não sendo utilizado, em grafos pouco densos.
+			A tarefa de retorno da lista de vértices adjacentes de um certo vértice é de complexidade linear. (Vai perguntar para toda a linha para saber adjacentes, problema em vetores grandes)
+		
+	Lista de Adjacências:
+		O grafo é representado como uma coleção de listas encadeadas, uma para cada vértice. Na lista encadeada de A, por exemplo, ficam armazenados todos os vértices adjacentes a A.
+			Ex: A->D
+				B->A
+				C->A C->B
+				D->C
+			A[] -> {D -> null}
+			B[] -> {A -> null}
+			C[] -> {A -> B -> null} (não indica encadeamento de A para B, significa que são adjacentes a C)
+			D[] -> {C -> null}
+			
+			VANTAGENS:
+				Espaço alocado dinamicamente (uso mais racional da memória)
+				A tarefa de retornar a lista de vértices adjacentes de um certo vértice é de complexidade constante.
+			DESVANTAGENS:
+				Pouco intuitivo.
+				A tarefa de se descobrir se existe uma aresta entre A e B é de complexidade linear. (obrigado a passar pela lista para descobrir, aumenta o processamento de acordo com o tamanho da lista)
+				
+		
+		
